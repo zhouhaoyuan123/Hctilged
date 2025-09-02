@@ -124,7 +124,9 @@ const TerminalComponent = ({ socket, connected }) => {
     const outputHandler = (data) => {
       // Process all server output
       if (terminalRef.current) {
-        terminalRef.current.write(data);
+        // Normalize line endings to prevent duplicate output
+        const normalizedData = data.replace(/\r\n|\r|\n/g, '\r\n');
+        terminalRef.current.write(normalizedData);
       }
     };
 
