@@ -1,6 +1,6 @@
 # Hctilg Editor
 
-A simple text editor component for web applications.
+A simple text editor.
 
 ## Features
 

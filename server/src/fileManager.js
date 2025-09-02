@@ -7,7 +7,9 @@ class FileManager {
       const content = await sshManager.executeCommand(null, command);
       return content;
     } catch (error) {
-      throw new Error(`Failed to read file: ${error.message}`);
+      console.error(`Failed to read file: ${error.message}`);
+      // Reload the current directory instead of opening the file
+      return null;
     }
   }
 
