@@ -107,9 +107,12 @@ const TerminalComponent = ({ socket, connected }) => {
       if (socket) {
         // Send input to server
         socket.emit('terminal:input', data);
-        
-        // Echo input locally for better responsiveness
-        if (terminalRef.current) {
+
+        // Avoid local echo if server echoes input
+        if (data === '\b' || data === '\x7f') {
+          // Handle backspace/delete locally
+          terminalRef.current.write('\b \b');
+        } else if (data.trim()) {
           terminalRef.current.write(data);
         }
       }
