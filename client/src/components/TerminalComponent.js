@@ -105,7 +105,8 @@ const TerminalComponent = ({ socket, connected }) => {
     // Setup input and output handling
     const dataHandler = (data) => {
       if (socket) {
-        // Send input to server
+        // Send input to server without local echo
+        // Server's PTY will handle the echo
         socket.emit('terminal:input', data);
 
         // Avoid local echo if server echoes input
@@ -121,8 +122,8 @@ const TerminalComponent = ({ socket, connected }) => {
     terminalRef.current.onData(dataHandler);
 
     const outputHandler = (data) => {
-      // Only process server output that's not our local echo
-      if (terminalRef.current && data.includes('\n')) {
+      // Process all server output
+      if (terminalRef.current) {
         terminalRef.current.write(data);
       }
     };
