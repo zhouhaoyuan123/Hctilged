@@ -1,0 +1,11 @@
+# Node modules directory
+/client/node_modules/
+/server/node_modules/
+# npm debug logs
+npm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
